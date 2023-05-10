@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Breno from './components/breno';
+import Fernando from './components/fernando';
+import Matheus from './components/matheus';
+import Sandro from './components/sandro';
+import Modal from './components/modal';
 
-function App() {
+const App = () => {
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  const openModal = (card) => {
+    setSelectedCard(card);
+  }
+
+  const closeModal = () => {
+    setSelectedCard(null);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Participantes do Projeto - 25Mob</h1>
+      <div className="card" onClick={() => openModal('breno')}>
+        <Breno />
+      </div>
+      <div className="card" onClick={() => openModal('fernando')}>
+        <Fernando />
+      </div>
+      <div className="card" onClick={() => openModal('matheus')}>
+        <Matheus />
+      </div>
+      <div className="card" onClick={() => openModal('sandro')}>
+        <Sandro />
+      </div>
+      {selectedCard && <Modal card={selectedCard} closeModal={closeModal} />}
     </div>
   );
 }
